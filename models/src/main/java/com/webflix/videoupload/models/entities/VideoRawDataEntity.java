@@ -18,16 +18,13 @@ public class VideoRawDataEntity {
 	private Integer id;
 
 	@Column(name = "video_id")
-	private String video_id;
+	private Integer video_id;
 
 	@Column(name = "url")
 	private String url;
 
 	@Column(name = "quality")
 	private String quality;
-
-	@Column(name = "fps")
-	private String fps;
 
 	// Getters & Setters
 
@@ -39,11 +36,11 @@ public class VideoRawDataEntity {
 		this.id = id;
 	}
 
-	public String getVideo_id() {
+	public Integer getVideo_id() {
 		return video_id;
 	}
 
-	public void setVideo_id(String video_id) {
+	public void setVideo_id(Integer video_id) {
 		this.video_id = video_id;
 	}
 
@@ -61,14 +58,6 @@ public class VideoRawDataEntity {
 
 	public void setQuality(String quality) {
 		this.quality = quality;
-	}
-
-	public String getFps() {
-		return fps;
-	}
-
-	public void setFps(String fps) {
-		this.fps = fps;
 	}
 
 }

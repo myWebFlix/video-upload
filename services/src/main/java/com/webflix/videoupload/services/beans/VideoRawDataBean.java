@@ -21,10 +21,27 @@ public class VideoRawDataBean {
 		return query.getResultList();
 	}
 
-	public List<VideoRawDataEntity> getVideoRawData(String videoId){
-		return em.createQuery("SELECT vrd FROM VideoRawDataEntity vrd WHERE vrd.video_id LIKE :video_id", VideoRawDataEntity.class)
+	public List<VideoRawDataEntity> getVideoRawData(Integer videoId){
+		return em.createQuery("SELECT vrd FROM VideoRawDataEntity vrd WHERE vrd.video_id = :video_id", VideoRawDataEntity.class)
 				.setParameter("video_id", videoId)
 				.getResultList();
+	}
+
+	public VideoRawDataEntity createVideoRawData(VideoRawDataEntity vrde) {
+
+		try {
+			beginTx();
+			em.persist(vrde);
+			commitTx();
+		} catch (Exception e) {
+			rollbackTx();
+		}
+
+		if (vrde.getId() == null) {
+			throw new RuntimeException("Entity was not persisted");
+		}
+
+		return vrde;
 	}
 
 	// Transactions

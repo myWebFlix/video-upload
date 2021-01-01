@@ -28,6 +28,10 @@
         <kumuluzee-cors.version>1.0.6</kumuluzee-cors.version>
         <google-cloud-storage.version>1.113.6</google-cloud-storage.version>
 
+        <httpclient.version>4.5.13</httpclient.version>
+
+        <json.version>20201115</json.version>
+
         <postgresql.version>42.2.17</postgresql.version>
     </properties>
 
@@ -76,6 +80,17 @@
                 <groupId>com.google.cloud</groupId>
                 <artifactId>google-cloud-storage</artifactId>
                 <version>${google-cloud-storage.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>${json.version}</version>
             </dependency>
 
             <dependency>
