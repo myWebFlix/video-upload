@@ -107,7 +107,7 @@ public class UploadResource {
 
 		HttpClient httpClient = HttpClientBuilder.create().build();
 		try {
-			HttpPost httpPost = new HttpPost("http://rok.zoxxnet.com/webflix/v1/videos");
+			HttpPost httpPost = new HttpPost("http://webflix:8080/v1/videos"); //"http://rok.zoxxnet.com/webflix/v1/videos");
 			StringEntity entity = new StringEntity("{\"title\":\"" + title + "\",\"description\":\"" + description + "\"}");
 			httpPost.addHeader("Content-Type", "application/json");
 			httpPost.setEntity(entity);
