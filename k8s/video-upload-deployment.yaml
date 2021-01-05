@@ -13,18 +13,28 @@ spec:
         app: video-upload
     spec:
       volumes:
-        - name: gcloud-storage-key
+        - name: gcloud-storage-api
           secret:
-            secretName: gcloud-storage-key
+            secretName: gcloud-storage-api
       containers:
-        - image: webflix/video-upload:2020-12-28-09-55-06
+        - image: webflix/video-upload:2021-01-01-21-27-23
           name: video-upload
           volumeMounts:
-            - name: gcloud-storage-key
+            - name: gcloud-storage-api
               mountPath: /var/secrets/gcloud-storage
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /var/secrets/gcloud-storage/key.json
+            - name: APPCONFIG_GCLOUDSTORAGE_PROJECTID
+              valueFrom:
+                secretKeyRef:
+                  name: gcloud-storage-api
+                  key: project_id
+            - name: APPCONFIG_GCLOUDSTORAGE_BUCKETNAME
+              valueFrom:
+                secretKeyRef:
+                  name: gcloud-storage-api
+                  key: bucket_name
             - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
               valueFrom:
                 secretKeyRef:

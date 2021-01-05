@@ -24,6 +24,7 @@ import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
+import com.webflix.videoupload.services.config.AppConfig;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -46,6 +47,9 @@ import java.util.concurrent.ThreadLocalRandom;
 @Produces(MediaType.APPLICATION_JSON)
 @CrossOrigin(supportedMethods = "GET, POST, HEAD, DELETE, OPTIONS")
 public class UploadResource {
+
+	@Inject
+	private AppConfig appConfig;
 
 	@Inject
 	private VideoRawDataBean videoRawDataBean;
@@ -88,8 +92,8 @@ public class UploadResource {
 
 		System.out.println(bytes.length);
 
-		String projectId = "webflix-295923";
-		String bucketName = "webflix-videos";
+		String projectId = appConfig.getProjectId(); //"webflix-295923";
+		String bucketName = appConfig.getBucketName(); //"webflix-videos";
 		String objectName = uniqueId + "-" + name;
 
 		Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();

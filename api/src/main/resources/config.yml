@@ -37,3 +37,7 @@ kumuluzee:
 #rest-config:
 #  maintenance-mode: false
 #  broken: false
+app-config:
+  gcloud-storage:
+    project-id:
+    bucket-name:
