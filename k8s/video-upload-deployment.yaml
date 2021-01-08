@@ -17,7 +17,7 @@ spec:
           secret:
             secretName: gcloud-storage-api
       containers:
-        - image: webflix/video-upload:2021-01-06-05-12-59
+        - image: webflix/video-upload:2021-01-06-05-22-06
           name: video-upload
           volumeMounts:
             - name: gcloud-storage-api

@@ -3,7 +3,9 @@ package com.webflix.videoupload.api.v1.resources;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.gson.JsonObject;
 import com.kumuluz.ee.cors.annotations.CrossOrigin;
+import com.kumuluz.ee.logs.cdi.Log;
 import com.webflix.videoupload.models.entities.VideoRawDataEntity;
+import com.webflix.videoupload.services.beans.LogTracerBean;
 import com.webflix.videoupload.services.beans.VideoRawDataBean;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -41,12 +43,16 @@ import java.nio.file.Paths;
 import java.util.concurrent.ThreadLocalRandom;
 
 
+@Log
 @ApplicationScoped
 @Path("/upload")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @CrossOrigin(supportedMethods = "GET, POST, HEAD, DELETE, OPTIONS")
 public class UploadResource {
+
+	@Inject
+	private LogTracerBean logTracerBean;
 
 	@Inject
 	private AppConfig appConfig;
@@ -110,6 +116,7 @@ public class UploadResource {
 			HttpPost httpPost = new HttpPost("http://webflix:8080/v1/videos"); //"http://rok.zoxxnet.com/webflix/v1/videos");
 			StringEntity entity = new StringEntity("{\"title\":\"" + title + "\",\"description\":\"" + description + "\"}");
 			httpPost.addHeader("Content-Type", "application/json");
+			httpPost.addHeader("Log-Tracer", logTracerBean.getUuid());
 			httpPost.setEntity(entity);
 			HttpResponse response = httpClient.execute(httpPost);
 
@@ -127,7 +134,7 @@ public class UploadResource {
 		} catch (Exception e) {
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 		}
-//
+
 //		try {
 //			return httpClient
 //					.target("34.107.92.162/webflix/v1/videos")
